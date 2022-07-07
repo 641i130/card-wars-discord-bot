@@ -1,4 +1,3 @@
-# Discord Card Wars Bot
 import os
 import discord
 from discord.ext import commands
@@ -14,7 +13,7 @@ def log_write(text):
 
 log_write("Starting BOT!!!")
 
-TOKEN = "INSERT BOT TOKEN!!!"
+TOKEN = "insert your token"
 bot = commands.Bot(command_prefix='$')
 bot.remove_command('help')
 
@@ -23,47 +22,66 @@ async def on_ready():
     await bot.change_presence(activity=discord.Game(name='Card Wars'))
     log_write('We have logged in as {0.user}'.format(bot))
 
+
+@bot.event
+async def on_command_error(ctx,error):
+    await ctx.send("Try `$help` for examples on how to use this.")
+    log_write("No arguments given with $c lol")
+    log_write("")
+
+
 @bot.command()
 async def c(ctx, *, arg):
+    embed = discord.Embed(color=0xfff100)
     with open('./cards.csv') as cfile:
         csv_file = csv.reader(cfile, delimiter=',',quotechar='"')
         # Find card and return value
         log_write("{1} \t$c {0}".format(arg,ctx.message.author))
+
         search=[]
-        s2=[]
+        for row in csv_file:
+            if (arg.startswith('"') and arg.endswith('"')):
+                    if (arg.replace('"',"").lower() == row[0].lower()):
+                        search.append(row)
+        cfile.seek(0)
+
         for row in csv_file:
             if arg.lower() in row[0].lower():
-                search.append(row[0])
-                returned_card=row
-            if arg == row[0]:
-                s2.append(row[0])
-                returned_card=row
+                search.append(row)
+
         if len(search) != 1:
-            if len(s2)==1:
-                search = s2
+            if len(search) == 0:
+                embed.set_author(name="No results found, Please try again.".format(str(len(search))))
+                await ctx.send(embed=embed)
+                log_write("Call for {} cards.".format(str(len(search))))
+                return
+
+            if len(search) > 24:
+                embed.set_author(name="That search exceeds the limit ({} cards were returned). Please be more specific.".format(str(len(search))))
+                await ctx.send(embed=embed)
+                log_write("Call for {} cards.".format(str(len(search))))
+                return
+
             if len(search) > 1:
-                embed = discord.Embed(color=0xfff100)
-                embed.set_author(name="Did you mean:")
+                embed.set_author(name="Multiple Results:")
+
                 x=1
                 for ting in search:
-                    embed.add_field(name=str(x)+".", value=ting, inline=False)    
+                    embed.add_field(name=str(x)+".", value=ting[0], inline=False)
                     x+=1
-                try:
-                    embed.add_field(name="Disclaimer", value="Try typing it with proper capitalization.", inline=False)    
-                    await ctx.send(embed=embed)
-                    log_write("".join(search))
-                    log_write("")
-                except:
-                    await ctx.send("That search exceeds the limit ({} cards were returned). Please be more specific.".format(str(len(search))))
-                    log_write("Call for {} cards.".format(str(len(search))))
 
+                embed.add_field(name="Hot Tip", value='insert quotes for more specific search results. eg "Jake"', inline=False)
+                await ctx.send(embed=embed)
+                log_write("Mulitple ({}) Results found".format(str(len(search))))
 
         if len(search) == 1:
+            returned_card=search[0]
+
             embed = discord.Embed(color=0xfff100)
 
-            embed.set_author(name=returned_card[0], icon_url="https://cdn.discordapp.com/avatars/705581980628025415/0a89eae2186c741e269d72b10c407b47.webp")
+            embed.set_author(name=returned_card[0], icon_url="insert your icon")
             embed.add_field(name="Deck / Quantity", value=returned_card[8].rstrip(), inline=False)
-            embed.set_thumbnail(url="http://35.184.199.95/images/{}.jpg".format(urllib.parse.quote(returned_card[0])))
+            embed.set_thumbnail(url="https://yourserver.com/cardwarsimages/{}.jpg".format(urllib.parse.quote(returned_card[0])))
 
             if (returned_card[2].rstrip() == "Creature"):
                 embed.add_field(name="Landscape", value=returned_card[3].rstrip(), inline=True)
@@ -72,7 +90,7 @@ async def c(ctx, *, arg):
                 embed.add_field(name="ATK", value=returned_card[5].rstrip(), inline=True)
                 embed.add_field(name="DEF", value=returned_card[6].rstrip(), inline=True)
                 embed.add_field(name="Description", value=returned_card[1].rstrip(), inline=True)
-                
+
             if (returned_card[2].rstrip() == "Spell" or returned_card[2].rstrip() == "Building" or returned_card[2].rstrip() == "Teamwork"):
                 embed.add_field(name="Landscape", value=returned_card[3].rstrip(), inline=True)
                 embed.add_field(name="Type", value=returned_card[2].rstrip(), inline=True)
@@ -83,50 +101,63 @@ async def c(ctx, *, arg):
                 embed.add_field(name="Type", value=returned_card[2].rstrip(), inline=True)
                 embed.add_field(name="Description", value=returned_card[1].rstrip(), inline=True)
                 #embed.add_field(name="Card Set", value=returned_card[9].rstrip(), inline=True)
-                
-            embed.add_field(name="Report a problem: ", value="Message <@!234651024634281984>", inline=True)
-            await ctx.send(embed=embed)
 
-            log_write("".join(search))
+            embed.add_field(name="Report a problem: ", value="Message <@!INSERT YOUR USER ID>", inline=True)
+            await ctx.send(embed=embed)
+            log_write(text.join(returned_card[0]))
             log_write("")
 
 @bot.command()
 async def img(ctx, *, arg):
+
+    embed = discord.Embed(color=0xfff100)
+
     with open('./cards.csv') as cfile:
         csv_file = csv.reader(cfile, delimiter=',',quotechar='"')
         # Find card and return value
-        log_write("{1} \t$c {0}".format(arg,ctx.message.author))
+        log_write("{1} \timg {0}".format(arg,ctx.message.author))
+
         search=[]
-        s2=[]
+        for row in csv_file:
+            if (arg.startswith('"') and arg.endswith('"')):
+                    if (arg.replace('"',"").lower() == row[0].lower()):
+                        search.append(row)
+        cfile.seek(0)
+
         for row in csv_file:
             if arg.lower() in row[0].lower():
-                search.append(row[0])
-                returned_card=row
-            if arg == row[0]:
-                s2.append(row[0])
-                returned_card=row
+                search.append(row)
+
         if len(search) != 1:
-            if len(s2)==1:
-                search = s2
+            if len(search) == 0:
+                embed.set_author(name="No results found, Please try again.".format(str(len(search))))
+                await ctx.send(embed=embed)
+                log_write("Call for {} cards.".format(str(len(search))))
+                return
+
+            if len(search) > 24:
+                embed.set_author(name="That search exceeds the limit ({} cards were returned). Please be more specific.".format(str(len(search))))
+                await ctx.send(embed=embed)
+                log_write("Call for {} cards.".format(str(len(search))))
+                return
+
             if len(search) > 1:
-                embed = discord.Embed(color=0xfff100)
-                embed.set_author(name="Did you mean:")
+                embed.set_author(name="Multiple Results:")
+
                 x=1
                 for ting in search:
-                    embed.add_field(name=str(x)+".", value=ting, inline=False)    
+                    embed.add_field(name=str(x)+".", value=ting[0], inline=False)
                     x+=1
-                try:
-                    embed.add_field(name="Disclaimer", value="Try typing it with proper capitalization.", inline=False)    
-                    await ctx.send(embed=embed)
-                    log_write("".join(search))
-                    log_write("")
-                except:
-                    await ctx.send("That search exceeds the limit ({} cards were returned). Please be more specific.".format(str(len(search))))
-                    log_write("Call for {} cards.".format(str(len(search))))
-        if len(search) == 1:
-            await ctx.send(file=discord.File("/home/carrotkumiko/images/{}.jpg".format(returned_card[0])))
 
-            log_write("".join(search))
+                embed.add_field(name="Hot Tip", value='insert quotes for more specific search results. eg "Jake"', inline=False)
+                await ctx.send(embed=embed)
+                log_write("Mulitple ({}) Results found".format(str(len(search))))
+
+        if len(search) == 1:
+            returned_card=search[0]
+
+            await ctx.send(file=discord.File("./images/{}.jpg".format(returned_card[0])))
+            print(','.join(str(v) for v in search))
             log_write("")
 
 @bot.command()
@@ -135,9 +166,9 @@ async def help(ctx, message=None):
     embed = discord.Embed(color=0xfff100)
     embed.set_author(name="Help Page")
     embed.add_field(name="Commands:", value="`$c [card name]` shows details of a card. \n `$img [card name]` shows just the image of a card.", inline=True)
-    embed.add_field(name="Report a problem: ", value="Message <@!234651024634281984>", inline=True)
+    embed.add_field(name="Report a problem: ", value="Message INSERT YOUR USER ID", inline=True)
     await ctx.author.send(embed=embed)
     log_write("Sent help message to {} DMS.".format(ctx.message.author))
+    await ctx.send("Check your dms!")
 
 bot.run(TOKEN)
-
