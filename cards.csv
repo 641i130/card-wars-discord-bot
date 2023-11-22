@@ -235,8 +235,8 @@ Helping Hand,FLOOP >>> Return a Building from your discard pile to your hand.,Cr
 Herculeye,Discard a card >>> Herculeye has +4 ATK this turn. (Use only once during each of your turns.),Creature,Useless Swamp,2,1,6,Ignition,Lumpy Space Princess' Blue Plains/Useless Swamp Deck (Totally Rad Deck) (CP3) - 2,Herculeye.jpg
 Hot Eyebat,Play Hot Eyebat only if you have 10 or more cards in your discard pile.,Creature,Useless Swamp,1,4,4,Continuous,BMO's Useless Swamp Deck (CP2) - 2,Hot Eyebat.jpg
 Hug It Out,"Destroy target Creature you control, and then destroy target Creature in its Lane.",Spell,NiceLands,1,,,,Charlie's Blue Plains/NiceLands Deck (2v2) - 1,Hug It Out.jpg
-Huggable Hedgehog,"While Huggable Hedgehog has 4 or more Damage on it, it deals Damage directly to your opponent instead of the opposing Creature.",Creature,NiceLands,2,3,8,,"Jake's Cornfield/NiceLands Deck
- (2v2) - 2",Huggable Hedgehog.jpg
+Huggable Hedgehog,"While Huggable Hedgehog has 4 or more Damage on it, it deals Damage directly to your opponent instead of the opposing Creature.",Creature,NiceLands,2,3,8,,"Jake's Cornfield/NiceLands Deck (2v2) - 2",Huggable Hedgehog.jpg
+huh,,huh,Rainbow,?,?,?,,Kickstarter,huh.png
 Hunkclops,,Creature,Rainbow,1,3,3,,Cake's Cornfield Deck (CP6) - 2,Hunkclops.jpg
 Huntress Wizard,"At the start of the game, choose a word with 3 or more letters. Whenever you play a card with that word in its name, deal 1 Damage to target Creature an opponent controls.",Hero,,,,,,Hero Pack #1 (HP1) - 1,Huntress Wizard.jpg
 Husker Amulet,Each of your Creature has +2 ATK this turn while attacking a Creature that is on a NiceLands Landscape.,Spell,Cornfield,1,,,,For the Glory! Booster Pack (FTG) - Common,Husker Amulet.jpg
@@ -492,6 +492,7 @@ The Big Hen House,"At the start of your turn, deal 1 or 2 Damage to your Creatur
 The Cooler,"When The Cooler leaves play, Freeze its Landscape.",Creature,IcyLands,2,4,7,Leaving Play,Gunter's Blue Plains/IcyLands Deck (CP5) - 1,The Cooler.jpg
 The Cooper,FLOOP >>> Target Creature gets +ATK this turn equal to the total cost of Teamwork cards your team controls.,Creature,SandyLands,2,3,8,,Grand Prix's SandyLands/IcyLands Deck (2v2) - 1,The Cooper.jpg
 The Dog,"FLOOP >>> Opposing Buildings in this Lane are blank while The Dog is Flooped ""Woof.""",Creature,Rainbow,1,1,7,,Fionna's Blue Plains Deck (CP6) - 2,The Dog.jpg
+The Lich,"Once during your turn, you may destroy a Creature you control to gain 1 Action.",Hero,,,,,,Kickstarter,The Lich.jpg
 The Mariachi,FLOOP >>> Deal 1 Damage to target Creature for each Creature that entered play this turn.,Creature,SandyLands,2,2,9,FLOOP,Lady Rainicorn's SandyLand Deck (CP2) - 2,The Mariachi.jpg
 The Pig,FLOOP >>> Flip target Cornfield Landscape in this Lane face down.,Creature,Rainbow,1,1,4,FLOOP,Finn's Blue Plains Deck (CP1) - 2,The Pig.jpg
 The Pig Promo,FLOOP >>> Flip target Cornfield Landscape in this Lane face down.,Creature,Rainbow,1,1,4,FLOOP,Cryptozoic Website,The Pig Promo.jpg
