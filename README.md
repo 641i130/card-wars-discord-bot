@@ -21,6 +21,12 @@ https://discord.gg/pH2AS45
 5. Run `python start.py` or setup that file to run with your favorite task manager
 
 
+## Updating the card data
+
+If you use `git pull` where you cloned the `CardWarsData` project the bot should automatically pick up the changes.
+
+You can submit a PR to `https://github.com/itderrickh/CardWarsData` if the data needs an update or you want to make changes.
+
 ## settings.ini value meanings
 
 * CardImages - The web address where you will serve the card images
